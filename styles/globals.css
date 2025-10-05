@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './theme.css';
+
+html, body, #__next { height: 100%; }
+
+@layer base {
+  body {
+    @apply bg-everforest-bg0 text-everforest-fg antialiased;
+  }
+}
+
+/* Optional: match JSONL's nice scrollbars */
+@layer components {
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.everforest.bg4') transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-everforest-bg1;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-everforest-bg4 rounded;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-everforest-bg5;
+  }
+}
