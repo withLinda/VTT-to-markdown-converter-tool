@@ -178,14 +178,22 @@ export default function Page() {
       {/* Main content (right) */}
       <section className="flex-1 min-h-0 min-w-0 p-4 sm:p-6 overflow-hidden flex flex-col">
         {/* Paragraph gap slider with dynamic fill */}
-        <div className="flex flex-wrap items-center gap-3 border-b border-everforest-bg4/60 pb-4 mb-4 bg-gradient-to-r from-everforest-bg1/90 to-everforest-bg-blue/55 -mx-4 sm:-mx-6 px-4 sm:px-6 py-3 rounded-b-xl">
-          <label htmlFor="gap" className="text-sm font-medium text-everforest-fg">Paragraph gap:</label>
-          <div className="range-wrapper flex-1 max-w-xs" style={{ '--range-progress': `${(state.gapThresholdSec / GAP_MAX_SEC) * 100}%` } as React.CSSProperties}>
-            <input id="gap" type="range" min={GAP_MIN_SEC} max={GAP_MAX_SEC} step={GAP_STEP_SEC}
-                   value={state.gapThresholdSec}
-                   onChange={(e) => dispatch({ type: 'set_gap', gap: Number(e.target.value) })}/>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-everforest-bg4/60 pb-4 mb-4 bg-gradient-to-r from-everforest-bg1/90 to-everforest-bg-blue/55 -mx-4 sm:-mx-6 px-4 sm:px-6 py-3 rounded-b-xl">
+          <div className="flex min-w-0 items-baseline gap-2">
+            <label htmlFor="gap" className="text-sm font-medium text-everforest-fg">New paragraph after pause:</label>
+            <span className="text-sm font-semibold text-everforest-yellow">{state.gapThresholdSec.toFixed(1)}s</span>
           </div>
-          <span className="text-sm font-semibold text-everforest-yellow min-w-[3rem]">{state.gapThresholdSec.toFixed(1)}s</span>
+          <div className="basis-full w-full max-w-md shrink-0">
+            <div className="range-wrapper" style={{ '--range-progress': `${(state.gapThresholdSec / GAP_MAX_SEC) * 100}%` } as React.CSSProperties}>
+              <input id="gap" type="range" min={GAP_MIN_SEC} max={GAP_MAX_SEC} step={GAP_STEP_SEC}
+                     value={state.gapThresholdSec}
+                     onChange={(e) => dispatch({ type: 'set_gap', gap: Number(e.target.value) })}/>
+            </div>
+            <div className="mt-1 flex justify-between text-[0.65rem] font-medium text-everforest-grey1">
+              <span>More breaks</span>
+              <span>Fewer breaks</span>
+            </div>
+          </div>
           {isConverting && <span className="text-sm text-everforest-orange font-medium">Converting… {convertedCount}/{totalCount}</span>}
         </div>
 

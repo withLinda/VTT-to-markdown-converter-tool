@@ -34,7 +34,7 @@ function previewValue(container: HTMLElement) {
 }
 
 function setParagraphGap(value: string) {
-  fireEvent.input(screen.getByRole('slider', { name: /Paragraph gap/i }), { target: { value } });
+  fireEvent.input(screen.getByRole('slider', { name: /New paragraph after pause/i }), { target: { value } });
 }
 
 describe('ActionBar', () => {
@@ -61,8 +61,10 @@ describe('Page paragraph gap control', () => {
   it('uses a fine default gap for dense captions', () => {
     render(<Page />);
 
-    expect(screen.getByRole('slider', { name: /Paragraph gap/i })).toHaveValue('0.3');
+    expect(screen.getByRole('slider', { name: /New paragraph after pause/i })).toHaveValue('0.3');
     expect(screen.getByText('0.3s')).toBeInTheDocument();
+    expect(screen.getByText('More breaks')).toBeInTheDocument();
+    expect(screen.getByText('Fewer breaks')).toBeInTheDocument();
   });
 
   it('uses the selected gap when converting after slider changes', async () => {

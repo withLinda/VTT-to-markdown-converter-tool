@@ -49,9 +49,10 @@ A web application that converts VTT (WebVTT) subtitle files into clean, readable
    - Drag and drop files/folders onto the interface
 
 2. **Adjust paragraph gap** (optional):
-   - Use the slider to set the time threshold (in seconds)
+   - Use the slider to set the pause threshold (in seconds)
    - The default is 0.3 seconds, which works better for dense course captions where most cue gaps are under one second
-   - Cues separated by more than this time will form new paragraphs
+   - Lower values create more paragraph breaks; higher values create fewer paragraph breaks
+   - At 0.0 seconds, even back-to-back cues can become separate paragraphs
    - Changing the slider updates already converted files, so previews and downloads stay in sync with the current setting
 
 3. **Convert files**:
