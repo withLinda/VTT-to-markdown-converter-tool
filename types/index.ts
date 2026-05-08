@@ -16,5 +16,5 @@ export interface LoadedFile {
 export interface AppState {
   files: Record<FileId, LoadedFile>;
   selectedId?: FileId;
-  gapThresholdSec: number; // default 3.0
+  gapThresholdSec: number; // default 0.3
 }

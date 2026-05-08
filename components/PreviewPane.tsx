@@ -2,8 +2,7 @@
 
 import React from 'react';
 import type { LoadedFile } from '@/types';
-import { parseVTTText } from '@/lib/parseVTT';
-import { cuesToParagraphs } from '@/lib/cuesToParagraphs';
+import { convertVTTToMarkdown } from '@/lib/convertVTTToMarkdown';
 
 interface Props {
   file?: LoadedFile;
@@ -19,9 +18,7 @@ export default function PreviewPane({ file, gapThresholdSec, onConverted }: Prop
       const f = file;
       if (!f) throw new Error('No file selected');
       if (!f.text) throw new Error('No text loaded');
-      const cues = parseVTTText(f.text);
-      const paras = cuesToParagraphs(cues, gapThresholdSec);
-      const md = paras.join('\n\n');
+      const md = convertVTTToMarkdown(f.text, gapThresholdSec);
       onConverted(f.id, md);
     } catch (e: any) {
       if (file) onConverted(file.id, '');
@@ -41,13 +38,13 @@ export default function PreviewPane({ file, gapThresholdSec, onConverted }: Prop
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex items-center justify-between border-b border-everforest-bg4 p-3 bg-gradient-to-r from-everforest-bg0 to-everforest-bg1">
+      <div className="flex items-center justify-between border-b border-everforest-bg4/60 p-3 bg-gradient-to-r from-everforest-bg1/95 to-everforest-bg-blue/55">
         <div className="text-sm font-medium text-everforest-fg">
-          <span className="font-semibold text-everforest-blue">{file.relativePath}</span>
+          <span className="font-semibold text-everforest-yellow">{file.relativePath}</span>
           <span className="text-everforest-grey1 mx-2">·</span>
-          <span className="text-everforest-purple">{(file.size/1024).toFixed(1)} KB</span>
+          <span className="text-everforest-orange">{(file.size/1024).toFixed(1)} KB</span>
           <span className="text-everforest-grey1 mx-2">·</span>
-          <span className="text-everforest-aqua">{file.status}</span>
+          <span className="text-everforest-green">{file.status}</span>
         </div>
         {file.status !== 'converted' ? (
           <button className="btn btn--success" onClick={handleConvert} aria-label="Convert">Convert</button>
@@ -58,13 +55,13 @@ export default function PreviewPane({ file, gapThresholdSec, onConverted }: Prop
       <div className="flex-1 p-3">
         {file.status === 'converted' && file.markdown ? (
           <textarea
-            className="w-full h-full resize-none border-2 border-everforest-aqua/30 rounded-xl p-4 bg-gradient-to-br from-everforest-bg0 to-everforest-bg1 custom-scrollbar shadow-inner font-mono text-sm leading-relaxed"
+            className="w-full h-full resize-none border border-everforest-green/45 rounded-xl p-4 bg-gradient-to-br from-everforest-bg-dim to-everforest-bg0 custom-scrollbar shadow-inner font-mono text-sm leading-relaxed text-everforest-fg"
             readOnly
             value={file.markdown}
           />
         ) : (
           <textarea
-            className="w-full h-full resize-none border-2 border-everforest-bg4 rounded-xl p-4 bg-gradient-to-br from-everforest-bg0 to-everforest-bg1 custom-scrollbar shadow-inner font-mono text-sm leading-relaxed text-everforest-grey1"
+            className="w-full h-full resize-none border border-everforest-bg4/70 rounded-xl p-4 bg-gradient-to-br from-everforest-bg-dim to-everforest-bg0 custom-scrollbar shadow-inner font-mono text-sm leading-relaxed text-everforest-grey0"
             readOnly
             value={file.text || ''}
           />

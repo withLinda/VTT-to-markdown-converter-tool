@@ -48,12 +48,12 @@ export default function FileTree({ files, selectedId, onSelect }: Props) {
   function statusDot(status: LoadedFile['status']) {
     const map: Record<LoadedFile['status'], { bg: string; shadow: string }> = {
       idle: { bg: 'bg-everforest-grey0', shadow: 'shadow-everforest-grey0/50' },
-      parsed: { bg: 'bg-everforest-blue', shadow: 'shadow-everforest-blue/50' },
-      converted: { bg: 'bg-everforest-aqua', shadow: 'shadow-everforest-aqua/50' },
+      parsed: { bg: 'bg-everforest-yellow', shadow: 'shadow-everforest-yellow/50' },
+      converted: { bg: 'bg-everforest-green', shadow: 'shadow-everforest-green/50' },
       error: { bg: 'bg-everforest-red', shadow: 'shadow-everforest-red/50' },
     };
     const { bg, shadow } = map[status];
-    return <span className={`inline-block w-2.5 h-2.5 rounded-full ${bg} shadow-md ${shadow} ring-1 ring-white/50`} aria-hidden />;
+    return <span className={`inline-block w-2.5 h-2.5 rounded-full ${bg} shadow-md ${shadow} ring-1 ring-everforest-bg-dim`} aria-hidden />;
   }
 
   function onKeyDown(e: React.KeyboardEvent) {
@@ -78,12 +78,12 @@ export default function FileTree({ files, selectedId, onSelect }: Props) {
             return (
               <li key={it.key} role="treeitem" aria-expanded={isOpen} className="select-none">
                 <button
-                  className="w-full text-left px-3 py-2 hover:bg-gradient-to-r hover:from-everforest-bg-blue/20 hover:to-transparent rounded-lg transition-all duration-150 font-medium text-everforest-blue"
+                  className="w-full text-left px-3 py-2 hover:bg-gradient-to-r hover:from-everforest-bg-yellow/45 hover:to-transparent rounded-lg transition-all duration-150 font-medium text-everforest-yellow"
                   style={{ paddingLeft: (it.depth + 1) * 12 }}
                   onClick={() => toggle(it.node.path)}
                   aria-label={`Folder ${it.node.name}`}
                 >
-                  <span className="mr-2 text-everforest-purple">{isOpen ? '▾' : '▸'}</span>
+                  <span className="mr-2 text-everforest-orange">{isOpen ? '▾' : '▸'}</span>
                   {it.node.name || 'Root'}
                 </button>
               </li>
@@ -95,8 +95,8 @@ export default function FileTree({ files, selectedId, onSelect }: Props) {
               <button
                 className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-150 ${
                   isSelected
-                    ? 'bg-gradient-to-r from-everforest-bg-green/30 to-everforest-bg-blue/20 border-l-4 border-everforest-aqua shadow-md font-semibold'
-                    : 'border-l-4 border-transparent hover:bg-gradient-to-r hover:from-everforest-bg1 hover:to-transparent hover:border-everforest-grey1'
+                    ? 'bg-gradient-to-r from-everforest-bg-yellow/70 to-everforest-bg-green/55 border-l-4 border-everforest-orange shadow-md font-semibold'
+                    : 'border-l-4 border-transparent hover:bg-gradient-to-r hover:from-everforest-bg1/90 hover:to-transparent hover:border-everforest-grey1'
                 }`}
                 style={{ paddingLeft: (it.depth + 2) * 12 }}
                 onClick={() => onSelect(it.file.id)}

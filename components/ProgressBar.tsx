@@ -13,7 +13,7 @@ export default function ProgressBar({ value, label }: Props) {
     <div className="w-full" aria-label={label || "Progress"} role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
       {label && <div className="flex items-center gap-2 mb-2">
         <span className="text-sm" aria-live="polite">{label}</span>
-        <span className="text-xs text-gray-500">{pct}%</span>
+        <span className="text-xs text-everforest-grey1">{pct}%</span>
       </div>}
       <div className="progress">
         <div className="progress__bar" style={{ '--value': `${pct}%` } as React.CSSProperties} />

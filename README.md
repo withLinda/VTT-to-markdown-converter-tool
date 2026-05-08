@@ -14,7 +14,7 @@ A web application that converts VTT (WebVTT) subtitle files into clean, readable
 
 ### Conversion
 - **Smart Paragraph Detection**: Automatically groups subtitle cues into paragraphs based on configurable time gaps
-- **Adjustable Gap Threshold**: Use the slider to set paragraph breaks (0-10 seconds)
+- **Adjustable Gap Threshold**: Use the fine-grained slider to set paragraph breaks (0-10 seconds, 0.1 second steps)
 - **Batch Conversion**: Convert all files at once with the "Convert All" button
 - **Real-time Preview**: See converted markdown instantly in the preview pane
 
@@ -50,7 +50,9 @@ A web application that converts VTT (WebVTT) subtitle files into clean, readable
 
 2. **Adjust paragraph gap** (optional):
    - Use the slider to set the time threshold (in seconds)
+   - The default is 0.3 seconds, which works better for dense course captions where most cue gaps are under one second
    - Cues separated by more than this time will form new paragraphs
+   - Changing the slider updates already converted files, so previews and downloads stay in sync with the current setting
 
 3. **Convert files**:
    - Click "Convert All" to process all uploaded files
